@@ -13,10 +13,10 @@ public class ServiceDeleteUsuario {
 	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
-	private ServiceFindByIdUsuario serviceFindByIdUsuario;
+	private ServiceFindUsuarios service;
 	
 	public void delete(Integer id) {
-		serviceFindByIdUsuario.find(id);
+		service.findById(id);
 		try {
 			usuarioRepository.deleteById(id);
 		} catch (Exception e) {

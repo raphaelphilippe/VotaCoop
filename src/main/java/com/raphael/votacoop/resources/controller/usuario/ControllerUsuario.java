@@ -19,8 +19,7 @@ import com.raphael.votacoop.domain.Usuario;
 import com.raphael.votacoop.dto.UsuarioDTO;
 import com.raphael.votacoop.resources.services.usuario.ServiceCreateUsuario;
 import com.raphael.votacoop.resources.services.usuario.ServiceDeleteUsuario;
-import com.raphael.votacoop.resources.services.usuario.ServiceFindAllUsuarios;
-import com.raphael.votacoop.resources.services.usuario.ServiceFindByIdUsuario;
+import com.raphael.votacoop.resources.services.usuario.ServiceFindUsuarios;
 import com.raphael.votacoop.resources.services.usuario.ServiceUpdateUsuario;
 
 @RestController
@@ -28,13 +27,10 @@ import com.raphael.votacoop.resources.services.usuario.ServiceUpdateUsuario;
 public class ControllerUsuario {
 	
 	@Autowired
-	private ServiceFindAllUsuarios serviceFindAllUsuarios;
+	private ServiceFindUsuarios serviceFindUsuarios;
 	
 	@Autowired
 	private ServiceCreateUsuario serviceCreateUsuario;
-	
-	@Autowired
-	private ServiceFindByIdUsuario serviceFindByIdUsuario;
 	
 	@Autowired
 	private ServiceDeleteUsuario serviceDeleteUsuario;
@@ -45,14 +41,14 @@ public class ControllerUsuario {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<UsuarioDTO>> findAll(){
-		List<Usuario> list = serviceFindAllUsuarios.findAll();
+		List<Usuario> list = serviceFindUsuarios.findAll();
 		List<UsuarioDTO> listDTO = list.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
 		return ResponseEntity.ok().body(listDTO);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Usuario> find(@PathVariable Integer id){
-		Usuario obj = serviceFindByIdUsuario.find(id);
+	public ResponseEntity<Usuario> findById(@PathVariable Integer id){
+		Usuario obj = serviceFindUsuarios.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	

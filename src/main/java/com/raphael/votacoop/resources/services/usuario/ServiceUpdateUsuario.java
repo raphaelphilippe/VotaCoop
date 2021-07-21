@@ -10,15 +10,14 @@ import com.raphael.votacoop.resources.repositories.UsuarioRepository;
 public class ServiceUpdateUsuario {
 
 	@Autowired
-	private ServiceFindByIdUsuario serviceUsuarioById;
+	private ServiceFindUsuarios serviceFindUsuarios;
 	
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
 	
 	public Usuario update(Usuario obj) {
-		serviceUsuarioById.find(obj.getId());
+		serviceFindUsuarios.findById(obj.getId());
 		return usuarioRepository.save(obj);
 	}
-	
 }

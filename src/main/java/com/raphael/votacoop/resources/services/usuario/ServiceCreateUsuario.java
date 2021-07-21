@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import com.raphael.votacoop.domain.Usuario;
 import com.raphael.votacoop.dto.UsuarioDTO;
-import com.raphael.votacoop.resources.exceptions.ValidationsException;
 import com.raphael.votacoop.resources.repositories.UsuarioRepository;
 
 @Service
