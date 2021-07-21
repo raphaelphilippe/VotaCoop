@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.Length;
 
 import com.raphael.votacoop.domain.Usuario;
 
-public class UsuarioDTO   implements Serializable{
+public class UsuarioDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
