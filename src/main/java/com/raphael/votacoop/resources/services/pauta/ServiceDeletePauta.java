@@ -13,10 +13,10 @@ public class ServiceDeletePauta {
 	private PautaRepository pautaRepository;
 	
 	@Autowired
-	private ServiceFindByIdPauta serviceFindByIdPauta;
+	private ServiceFindPautas serviceFindPautas;
 	
 	public void delete(Integer id) {
-		serviceFindByIdPauta.find(id);
+		serviceFindPautas.find(id);
 		try {
 			pautaRepository.deleteById(id);
 		} catch (Exception e) {

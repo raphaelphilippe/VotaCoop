@@ -15,21 +15,17 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.raphael.votacoop.domain.Pauta;
 import com.raphael.votacoop.resources.services.pauta.ServiceCreatePauta;
 import com.raphael.votacoop.resources.services.pauta.ServiceDeletePauta;
-import com.raphael.votacoop.resources.services.pauta.ServiceFindAllPautas;
-import com.raphael.votacoop.resources.services.pauta.ServiceFindByIdPauta;
+import com.raphael.votacoop.resources.services.pauta.ServiceFindPautas;
 
 @RestController
 @RequestMapping(value="/pautas")
 public class ControllerPauta {
 
 	@Autowired
-	private ServiceFindAllPautas serviceFindAllPautas;
+	private ServiceFindPautas serviceFindPautas;
 	
 	@Autowired
 	private ServiceCreatePauta serviceCreatePauta;
-	
-	@Autowired
-	private ServiceFindByIdPauta serviceFindByIdPauta;
 	
 	@Autowired
 	private ServiceDeletePauta serviceDeletePauta;
@@ -37,13 +33,13 @@ public class ControllerPauta {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Pauta>> findAll(){
-		List<Pauta> list = serviceFindAllPautas.findAll();
+		List<Pauta> list = serviceFindPautas.findAll();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Pauta> find(@PathVariable Integer id){
-		Pauta obj = serviceFindByIdPauta.find(id);
+		Pauta obj = serviceFindPautas.find(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	

@@ -1,5 +1,6 @@
 package com.raphael.votacoop.resources.services.pauta;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,14 @@ import com.raphael.votacoop.resources.exceptions.ObjectNotFoundException;
 import com.raphael.votacoop.resources.repositories.PautaRepository;
 
 @Service
-public class ServiceFindByIdPauta {
+public class ServiceFindPautas {
 
 	@Autowired
 	private PautaRepository pautaRepository;
+	
+	public List<Pauta> findAll(){
+		return pautaRepository.findAll();
+	}
 	
 	public Pauta find(Integer id) {
 		Optional<Pauta> obj = pautaRepository.findById(id);
