@@ -1,4 +1,4 @@
-package com.raphael.votacoop.dto;
+package com.raphael.votacoop.dtos;
 
 import java.io.Serializable;
 

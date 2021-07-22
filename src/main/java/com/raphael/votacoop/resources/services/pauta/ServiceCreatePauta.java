@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.raphael.votacoop.domain.Pauta;
 import com.raphael.votacoop.domain.enums.StatusPauta;
-import com.raphael.votacoop.dto.PautaDTO;
+import com.raphael.votacoop.dtos.PautaDTO;
 import com.raphael.votacoop.resources.repositories.PautaRepository;
 
 @Service

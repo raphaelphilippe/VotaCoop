@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.raphael.votacoop.domain.Usuario;
-import com.raphael.votacoop.dto.UsuarioDTO;
+import com.raphael.votacoop.dtos.UsuarioDTO;
 import com.raphael.votacoop.resources.repositories.UsuarioRepository;
 
 @Service

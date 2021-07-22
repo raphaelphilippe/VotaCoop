@@ -1,4 +1,4 @@
-package com.raphael.votacoop.resources.controller.pauta;
+package com.raphael.votacoop.resources.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.raphael.votacoop.domain.Pauta;
-import com.raphael.votacoop.dto.PautaDTO;
+import com.raphael.votacoop.dtos.PautaDTO;
 import com.raphael.votacoop.resources.services.pauta.ServiceCreatePauta;
 import com.raphael.votacoop.resources.services.pauta.ServiceDeletePauta;
 import com.raphael.votacoop.resources.services.pauta.ServiceFindPautas;

@@ -1,4 +1,4 @@
-package com.raphael.votacoop.resources.controller.usuario;
+package com.raphael.votacoop.resources.controllers;
 
 import java.net.URI;
 import java.util.List;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.raphael.votacoop.domain.Usuario;
-import com.raphael.votacoop.dto.UsuarioDTO;
+import com.raphael.votacoop.dtos.UsuarioDTO;
 import com.raphael.votacoop.resources.services.usuario.ServiceCreateUsuario;
 import com.raphael.votacoop.resources.services.usuario.ServiceDeleteUsuario;
 import com.raphael.votacoop.resources.services.usuario.ServiceFindUsuarios;
