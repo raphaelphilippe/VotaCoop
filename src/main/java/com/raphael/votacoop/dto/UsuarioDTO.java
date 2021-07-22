@@ -2,6 +2,7 @@ package com.raphael.votacoop.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
@@ -18,6 +19,8 @@ public class UsuarioDTO implements Serializable{
 	private String nome;
 	
 	private String cpf;
+	
+	@Email(message="Email inválido.")
 	private String email;
 	
 	public UsuarioDTO() {

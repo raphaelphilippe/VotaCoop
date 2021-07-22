@@ -44,6 +44,7 @@ public class VotacoopApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		
 		Date dataHoraAtual = new Date();
+		System.out.println("TESTESSS DATAAAA" + dataHoraAtual);
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		SimpleDateFormat sdfTempo = new SimpleDateFormat("HH:mm");

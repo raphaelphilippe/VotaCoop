@@ -43,7 +43,14 @@ public class Pauta implements Serializable{
 		this.statusPauta = statusPauta.getCod();
 		this.dataCriacaoPauta = dataCriacaoPauta;
 	}
+	
+	public Pauta(Integer id, String descricao) {
+		super();
+		this.id = id;
+		this.descricao = descricao;
+	}
 
+	
 	public Integer getId() {
 		return id;
 	}

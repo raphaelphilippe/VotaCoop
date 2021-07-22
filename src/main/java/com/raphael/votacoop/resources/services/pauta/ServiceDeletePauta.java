@@ -16,7 +16,7 @@ public class ServiceDeletePauta {
 	private ServiceFindPautas serviceFindPautas;
 	
 	public void delete(Integer id) {
-		serviceFindPautas.find(id);
+		serviceFindPautas.findById(id);
 		try {
 			pautaRepository.deleteById(id);
 		} catch (Exception e) {
