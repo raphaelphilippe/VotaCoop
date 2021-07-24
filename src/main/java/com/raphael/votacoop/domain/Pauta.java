@@ -1,7 +1,7 @@
 package com.raphael.votacoop.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -27,7 +27,7 @@ public class Pauta implements Serializable{
 	private Integer statusPauta;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataCriacaoPauta; 
+	private LocalDateTime dataCriacaoPauta; 
 	
 	@OneToOne(cascade=CascadeType.ALL, mappedBy = "pauta")
 	private SessaoVotacao sessaoVotacao;
@@ -36,7 +36,7 @@ public class Pauta implements Serializable{
 		
 	}
 
-	public Pauta(Integer id, String descricao, StatusPauta statusPauta, Date dataCriacaoPauta) {
+	public Pauta(Integer id, String descricao, StatusPauta statusPauta, LocalDateTime dataCriacaoPauta) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -71,11 +71,11 @@ public class Pauta implements Serializable{
 		return StatusPauta.toEnum(this.statusPauta);
 	}
 
-	public Date getDataCriacaoPauta() {
+	public LocalDateTime getDataCriacaoPauta() {
 		return dataCriacaoPauta;
 	}
 
-	public void setDataCriacaoPauta(Date dataCriacaoPauta) {
+	public void setDataCriacaoPauta(LocalDateTime dataCriacaoPauta) {
 		this.dataCriacaoPauta = dataCriacaoPauta;
 	}
 

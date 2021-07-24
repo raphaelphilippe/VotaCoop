@@ -2,8 +2,8 @@ package com.raphael.votacoop.domain.enums;
 
 public enum StatusSessao {
 
-	EM_VOTACAO(1, "Em Votação"),
-	VOTADA(2, "Votada");
+	VOTACAO_ABERTA(1, "Votação Aberta"),
+	VOTACAO_FINALIZADA(2, "Votação Finalizada");
 	
 	private int cod;
 	private String descricao;

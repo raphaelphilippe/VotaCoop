@@ -1,6 +1,7 @@
 package com.raphael.votacoop;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 
@@ -15,6 +16,8 @@ import com.raphael.votacoop.domain.Usuario;
 import com.raphael.votacoop.domain.Voto;
 import com.raphael.votacoop.domain.enums.StatusPauta;
 import com.raphael.votacoop.domain.enums.StatusSessao;
+import com.raphael.votacoop.dtos.PautaDTO;
+import com.raphael.votacoop.dtos.SessaoVotacaoDTO;
 import com.raphael.votacoop.resources.repositories.PautaRepository;
 import com.raphael.votacoop.resources.repositories.SessaoVotacaoRepository;
 import com.raphael.votacoop.resources.repositories.UsuarioRepository;
@@ -43,30 +46,32 @@ public class VotacoopApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Date dataHoraAtual = new Date();
-		System.out.println("TESTESSS DATAAAA" + dataHoraAtual);
+		//SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		//SimpleDateFormat sdfTempo = new SimpleDateFormat("HH:mm");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		SimpleDateFormat sdfTempo = new SimpleDateFormat("HH:mm");
+		LocalDateTime dataHoraAtual = LocalDateTime.now();
 			
-		Pauta p1 = new Pauta(null, "Votação para saber se SIM ou NÃO", StatusPauta.ABERTA, dataHoraAtual);
+		//PautaDTO p1 = new PautaDTO(null, "É SIM ou NÂO?", StatusPauta.ABERTA, dataHoraAtual);
+		//PautaDTO p1 = new PautaDTO("Responder se é SIM ou NÃO");
 		
-		SessaoVotacao sv1 = new SessaoVotacao(null, dataHoraAtual, sdfTempo.parse("01:00"), StatusSessao.EM_VOTACAO, p1);
-		p1.setSessaoVotacao(sv1);
+		//SessaoVotacao sv1 = new SessaoVotacao(null, dataHoraAtual, "00:20", p1);
+		//SessaoVotacao sv1 = new SessaoVotacao(null, dataHoraAtual, "01:00", p1);
+		//SessaoVotacaoDTO svDto1 = new SessaoVotacaoDTO(sv1);
+		//p1.setSessaoVotacao(sv1);
 		
-		sv1.setStatusSessao(StatusSessao.VOTADA.getCod());
+		//sv1.setStatusSessao(StatusSessao.VOTADA.getCod());
 		
-		pautaRepository.saveAll(Arrays.asList(p1));
-		sessaoVotacaoRepository.saveAll(Arrays.asList(sv1));
+		//pautaRepository.saveAll(Arrays.asList(p1));
+		//sessaoVotacaoRepository.saveAll(Arrays.asList(sv1));
 		
-		Usuario usu1 = new Usuario(null, "Raphael Philippe", "05888397792", "raphael@gmail.com");
-		Usuario usu2 = new Usuario(null, "Andrea Barcelos", "10626365708", "andrea@gmail.com");
-		usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
+		//Usuario usu1 = new Usuario(null, "Raphael Philippe", "05888397792", "raphael@gmail.com");
+		//Usuario usu2 = new Usuario(null, "Andrea Barcelos", "10626365708", "andrea@gmail.com");
+		//usuarioRepository.saveAll(Arrays.asList(usu1, usu2));
 		
-		Voto v1 = new Voto(null, "Sim", dataHoraAtual, sv1, usu1);
-		Voto v2 = new Voto(null, "Não", dataHoraAtual, sv1, usu2);
-		votoRepository.saveAll(Arrays.asList(v1, v2));
-			
+		//Voto v1 = new Voto(null, "Sim", dataHoraAtual, sv1, usu2);
+		//Voto v2 = new Voto(null, "Não", dataHoraAtual, sv1, usu2);
+		//votoRepository.saveAll(Arrays.asList(v1, v2));
+		
 	}
 
 }

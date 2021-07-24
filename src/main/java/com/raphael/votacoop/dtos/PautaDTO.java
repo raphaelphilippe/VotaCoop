@@ -15,6 +15,7 @@ public class PautaDTO implements Serializable{
 	@Length(min=15, max=140, message="O campo Descrição deve ter entre 15 e 140 caracteres.")
 	private String descricao;
 	
+	
 	public PautaDTO() {
 		
 	}	
@@ -22,7 +23,12 @@ public class PautaDTO implements Serializable{
 	public PautaDTO(Pauta obj) {
 		this.descricao = obj.getDescricao();
 	}
+	
+	public PautaDTO(String descricao) {
+		this.descricao = descricao;
+	}
 
+	
 	public String getDescricao() {
 		return descricao;
 	}

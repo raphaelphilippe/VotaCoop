@@ -1,6 +1,6 @@
 package com.raphael.votacoop.resources.services.pauta;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +22,7 @@ public class ServiceCreatePauta {
 	}
 	
 	public Pauta fromDTOCreate(PautaDTO objDTO) {
-		Date dataHoraAtual = new Date();
+		LocalDateTime dataHoraAtual = LocalDateTime.now();
 		return new Pauta(null, objDTO.getDescricao(), StatusPauta.ABERTA, dataHoraAtual);
 	}
 }

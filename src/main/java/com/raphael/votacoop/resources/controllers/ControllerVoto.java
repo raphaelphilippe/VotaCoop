@@ -22,12 +22,8 @@ import com.raphael.votacoop.resources.services.pauta.ServiceFindPautas;
 import com.raphael.votacoop.resources.services.pauta.ServiceUpdatePauta;
 
 @RestController
-@RequestMapping(value="/pautas")
-public class ControllerPauta {
-
-	public ControllerPauta() {
-		
-	}
+@RequestMapping(value="/votos")
+public class ControllerVoto {
 
 	@Autowired
 	private ServiceFindPautas serviceFindPautas;
@@ -40,7 +36,7 @@ public class ControllerPauta {
 	
 	@Autowired
 	private ServiceUpdatePauta serviceUpdatePauta;
-	
+
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
@@ -52,7 +48,6 @@ public class ControllerPauta {
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Pauta> find(@PathVariable Integer id){
 		Pauta obj = serviceFindPautas.findById(id);
-		System.out.println("TESTE " + obj.toString());
 		return ResponseEntity.ok().body(obj);
 	}
 	

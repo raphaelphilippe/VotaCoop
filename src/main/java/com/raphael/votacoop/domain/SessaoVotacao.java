@@ -1,8 +1,8 @@
 package com.raphael.votacoop.domain;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,7 +17,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.raphael.votacoop.domain.enums.StatusSessao;
+//import com.raphael.votacoop.domain.enums.StatusSessao;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -28,12 +28,12 @@ public class SessaoVotacao implements Serializable{
 	private Integer id;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date dataHoraInicioSessao;
+	private LocalDateTime dataHoraInicioSessao;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-	private Date tempoPrazo;
+	private String tempoPrazo;
 		
-	private Integer statusSessao;
+	//private Integer statusSessao;
 	
 	@JsonIgnore
 	@OneToOne
@@ -49,12 +49,12 @@ public class SessaoVotacao implements Serializable{
 		
 	}
 
-	public SessaoVotacao(Integer id, Date dataHoraInicioSessao, Date tempoPrazo,  StatusSessao statusSessao, Pauta pauta) {
+	public SessaoVotacao(Integer id, LocalDateTime dataHoraInicioSessao, String tempoPrazo, Pauta pauta) {
 		super();
 		this.id = id;
 		this.dataHoraInicioSessao = dataHoraInicioSessao;
 		this.tempoPrazo = tempoPrazo;
-		this.statusSessao = statusSessao.getCod();
+		//this.statusSessao = statusSessao.getCod();
 		this.pauta = pauta;
 	}
 
@@ -67,29 +67,29 @@ public class SessaoVotacao implements Serializable{
 	}
 	
 
-	public Date getDataHoraInicioSessao() {
+	public LocalDateTime getDataHoraInicioSessao() {
 		return dataHoraInicioSessao;
 	}
 
-	public void setDataHoraInicioSessao(Date dataHoraInicioSessao) {
+	public void setDataHoraInicioSessao(LocalDateTime dataHoraInicioSessao) {
 		this.dataHoraInicioSessao = dataHoraInicioSessao;
 	}
 
-	public Date getTempoPrazo() {
+	public String getTempoPrazo() {
 		return tempoPrazo;
 	}
 
-	public void setTempoPrazo(Date tempoPrazo) {
+	public void setTempoPrazo(String tempoPrazo) {
 		this.tempoPrazo = tempoPrazo;
 	}
 
-	public StatusSessao getStatusSessao() {
-		return StatusSessao.toEnum(statusSessao);
-	}
+	//public StatusSessao getStatusSessao() {
+	//	return StatusSessao.toEnum(statusSessao);
+	//}
 
-	public void setStatusSessao(Integer statusSessao) {
-		this.statusSessao = statusSessao;
-	}
+	//public void setStatusSessao(Integer statusSessao) {
+	//	this.statusSessao = statusSessao;
+	//}
 
 	public Pauta getPauta() {
 		return pauta;
@@ -115,4 +115,12 @@ public class SessaoVotacao implements Serializable{
 		SessaoVotacao other = (SessaoVotacao) obj;
 		return Objects.equals(id, other.id);
 	}
+
+	@Override
+	public String toString() {
+		return "SessaoVotacao [id=" + id + ", dataHoraInicioSessao=" + dataHoraInicioSessao + ", tempoPrazo="
+				+ tempoPrazo + ", pauta=" + pauta + ", votos=" + votos + "]";
+	}
+	
+	
 }

@@ -1,7 +1,7 @@
 package com.raphael.votacoop.domain;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -19,21 +19,21 @@ public class Voto implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String voto;
-	private Date dataHoraVoto;
+	private LocalDateTime dataHoraVoto;
 	
 	@ManyToOne
-	@JoinColumn(name="id_sessao")
+	@JoinColumn(name="id_Sessao")
 	private SessaoVotacao sessaoVotacao;
 	
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name="id_Usuario")
 	private Usuario usuario;
 	
 	public Voto() {
 		
 	}
 
-	public Voto(Integer id, String voto, Date dataHoraVoto, SessaoVotacao sessaoVotacao, Usuario usuario) {
+	public Voto(Integer id, String voto, LocalDateTime dataHoraVoto, SessaoVotacao sessaoVotacao, Usuario usuario) {
 		super();
 		this.id = id;
 		this.voto = voto;
@@ -58,11 +58,11 @@ public class Voto implements Serializable{
 		this.voto = voto;
 	}
 
-	public Date getDataHoraVoto() {
+	public LocalDateTime getDataHoraVoto() {
 		return dataHoraVoto;
 	}
 
-	public void setDataHoraVoto(Date dataHoraVoto) {
+	public void setDataHoraVoto(LocalDateTime dataHoraVoto) {
 		this.dataHoraVoto = dataHoraVoto;
 	}
 
