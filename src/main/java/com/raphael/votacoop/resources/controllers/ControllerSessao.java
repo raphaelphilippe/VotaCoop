@@ -34,9 +34,9 @@ public class ControllerSessao {
 	private ServiceDeleteSessaoVotacao serviceDeleteSessaoVotacao;
 		
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<SessaoVotacao>> findAll(){
-		List<SessaoVotacao> listSessaoVotacao = serviceFindSessaoVotacao.findAll();
-		return ResponseEntity.ok().body(listSessaoVotacao);
+	public ResponseEntity<List<SessaoVotacaoDTO>> findAll(){
+		List<SessaoVotacaoDTO> listSessaoVotacaoDTO = serviceFindSessaoVotacao.findAllDTO();
+		return ResponseEntity.ok().body(listSessaoVotacaoDTO);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

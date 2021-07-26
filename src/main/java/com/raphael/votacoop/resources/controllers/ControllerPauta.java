@@ -45,15 +45,14 @@ public class ControllerPauta {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Pauta>> findAll(){
-		List<Pauta> list = serviceFindPautas.findAll();
-		return ResponseEntity.ok().body(list);
+		List<Pauta> listPautas = serviceFindPautas.findAll();
+		return ResponseEntity.ok().body(listPautas);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Pauta> find(@PathVariable Integer id){
-		Pauta obj = serviceFindPautas.findById(id);
-		System.out.println("TESTE " + obj.toString());
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<PautaDTO> find(@PathVariable Integer id){
+		PautaDTO PautaDTO = serviceFindPautas.findByIdDTO(id);
+		return ResponseEntity.ok().body(PautaDTO);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)

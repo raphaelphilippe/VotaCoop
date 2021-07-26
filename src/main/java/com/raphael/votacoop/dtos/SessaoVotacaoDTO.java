@@ -3,7 +3,8 @@ package com.raphael.votacoop.dtos;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
-import com.raphael.votacoop.domain.Pauta;
+import com.fasterxml.jackson.annotation.JsonFormat;
+//import com.raphael.votacoop.domain.Pauta;
 import com.raphael.votacoop.domain.SessaoVotacao;
 import com.raphael.votacoop.domain.enums.StatusSessao;
 
@@ -11,11 +12,17 @@ public class SessaoVotacaoDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id;
-	private LocalDateTime dataHoraInicioSessao;
-	private String tempoPrazo;
-	private Pauta pauta;
+	//private Pauta pauta;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataHoraInicioSessao;
+	
+	private String tempoPrazo;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataHoraFinalSessao;
 	private StatusSessao statusSessao;
+	
 	private Integer qtdSim;
 	private Integer qtdNao;
 	
@@ -54,14 +61,22 @@ public class SessaoVotacaoDTO implements Serializable{
 	public void setTempoPrazo(String tempoPrazo) {
 		this.tempoPrazo = tempoPrazo;
 	}
-
-	public Pauta getPauta() {
-		return pauta;
+	
+	public LocalDateTime getDataHoraFinalSessao() {
+		return dataHoraFinalSessao;
 	}
 
-	public void setPauta(Pauta pauta) {
-		this.pauta = pauta;
+	public void setDataHoraFinalSessao(LocalDateTime dataHoraFinalSessao) {
+		this.dataHoraFinalSessao = dataHoraFinalSessao;
 	}
+
+	//public Pauta getPauta() {
+	//	return pauta;
+	//}
+
+	//public void setPauta(Pauta pauta) {
+	//	this.pauta = pauta;
+	//}
 
 	public StatusSessao getStatusSessao() {
 		return statusSessao;
@@ -86,13 +101,4 @@ public class SessaoVotacaoDTO implements Serializable{
 	public void setQtdNao(Integer qtdNao) {
 		this.qtdNao = qtdNao;
 	}
-
-	@Override
-	public String toString() {
-		return "SessaoVotacaoDTO [id=" + id + ", pauta=" + pauta + ", dataHoraInicioSessao=" + dataHoraInicioSessao
-				+ ", tempoPrazo=" + tempoPrazo + ", statusSessao=" + statusSessao + ", qtdSim=" + qtdSim + ", qtdNao="
-				+ qtdNao + "]";
-	}
-	
-	
 }
