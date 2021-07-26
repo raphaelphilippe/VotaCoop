@@ -1,5 +1,6 @@
 package com.raphael.votacoop.resources.services.pauta;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,6 +34,19 @@ public class ServiceFindPautas {
 		Optional<Pauta> obj = pautaRepository.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Pauta não encontrada! ID: " + id + ", Tipo: " + Pauta.class.getSimpleName()));
 
+	}
+	
+	public List<PautaDTO> findAllDTO(){
+		
+		List<Pauta> listPautas = this.findAll();
+		
+		List<PautaDTO> listPautaDTO = new ArrayList<>();
+		
+		for(Pauta pauta : listPautas) {
+			listPautaDTO.add(findByIdDTO(pauta.getId()));
+		}
+		
+		return listPautaDTO;
 	}
 	
 	public PautaDTO findByIdDTO(Integer id) {

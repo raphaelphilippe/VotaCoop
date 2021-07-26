@@ -1,74 +1,79 @@
 package com.raphael.votacoop.resources.controllers;
 
-import java.net.URI;
 import java.util.List;
-
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.raphael.votacoop.domain.Pauta;
-import com.raphael.votacoop.dtos.PautaDTO;
-import com.raphael.votacoop.resources.services.pauta.ServiceCreatePauta;
-import com.raphael.votacoop.resources.services.pauta.ServiceDeletePauta;
-import com.raphael.votacoop.resources.services.pauta.ServiceFindPautas;
-import com.raphael.votacoop.resources.services.pauta.ServiceUpdatePauta;
+import com.raphael.votacoop.domain.Voto;
+import com.raphael.votacoop.resources.services.voto.ServiceCreateVoto;
+import com.raphael.votacoop.resources.services.voto.ServiceDeleteVoto;
+import com.raphael.votacoop.resources.services.voto.ServiceFindVotos;
+import com.raphael.votacoop.resources.services.voto.ServiceUpdateVoto;
 
 @RestController
 @RequestMapping(value="/votos")
 public class ControllerVoto {
 
 	@Autowired
-	private ServiceFindPautas serviceFindPautas;
+	private ServiceFindVotos serviceFindVotos;
 	
 	@Autowired
-	private ServiceCreatePauta serviceCreatePauta;
+	private ServiceCreateVoto serviceCreateVoto;
 	
 	@Autowired
-	private ServiceDeletePauta serviceDeletePauta;
+	private ServiceDeleteVoto serviceDeleteVoto;
 	
 	@Autowired
-	private ServiceUpdatePauta serviceUpdatePauta;
+	private ServiceUpdateVoto serviceUpdateVoto;
 
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Pauta>> findAll(){
-		List<Pauta> list = serviceFindPautas.findAll();
-		return ResponseEntity.ok().body(list);
+	public ResponseEntity<List<Voto>> findAll(){
+		List<Voto> listVotos = serviceFindVotos.findAllVotos();
+		return ResponseEntity.ok().body(listVotos);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public ResponseEntity<Pauta> find(@PathVariable Integer id){
-		Pauta obj = serviceFindPautas.findById(id);
-		return ResponseEntity.ok().body(obj);
+	public ResponseEntity<Voto> findById(@PathVariable Integer id){
+		Voto voto = serviceFindVotos.findById(id);
+		return ResponseEntity.ok().body(voto);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody PautaDTO objDTO){
-		Pauta obj = serviceCreatePauta.fromDTOCreate(objDTO);
-		obj = serviceCreatePauta.create(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+	@RequestMapping(value="/sessaousuario", method=RequestMethod.GET)
+	public ResponseEntity<Voto> findAllBySessaoVotacaoIdAndUsuarioId(
+			@RequestParam(required = true) Integer id_sessao, 
+			@RequestParam(required = true) Integer id_usuario
+	){
+		
+		Voto voto = serviceFindVotos.findBySessaoVotacaoIdAndUsuarioId(id_sessao, id_usuario);
+		
+		return ResponseEntity.ok().body(voto);
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody PautaDTO objDTO, @PathVariable Integer id){
-		Pauta obj = new Pauta(id, objDTO.getDescricao());
-		obj = serviceUpdatePauta.update(obj);
-		return ResponseEntity.noContent().build();
+	@RequestMapping(value="/usuario", method=RequestMethod.GET)
+	public ResponseEntity<List<Voto>> findAllVotosByIdUsuario(
+			@RequestParam(required = true) Integer id_usuario
+	){
+		List<Voto> listVotos = serviceFindVotos.findAllByUsuarioId(id_usuario);
+		
+		return ResponseEntity.ok().body(listVotos);
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Void> delete(@PathVariable Integer id){
-		serviceDeletePauta.delete(id);
-		return ResponseEntity.noContent().build();
+	@RequestMapping(value="/sessao", method=RequestMethod.GET)
+	public ResponseEntity<List<Voto>> findAllByIdSessao(
+			@RequestParam(required = true) Integer id_sessao
+	){
+		
+		List<Voto> listVotos = serviceFindVotos.findAllByIdSessaoId(id_sessao);
+		
+		return ResponseEntity.ok().body(listVotos);
 	}
+	
 }

@@ -44,9 +44,9 @@ public class ControllerPauta {
 	
 	
 	@RequestMapping(method=RequestMethod.GET)
-	public ResponseEntity<List<Pauta>> findAll(){
-		List<Pauta> listPautas = serviceFindPautas.findAll();
-		return ResponseEntity.ok().body(listPautas);
+	public ResponseEntity<List<PautaDTO>> findAll(){
+		List<PautaDTO> listPautasDTO = serviceFindPautas.findAllDTO();
+		return ResponseEntity.ok().body(listPautasDTO);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)

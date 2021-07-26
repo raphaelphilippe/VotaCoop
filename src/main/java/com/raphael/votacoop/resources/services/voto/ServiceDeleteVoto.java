@@ -7,7 +7,7 @@ import com.raphael.votacoop.domain.Voto;
 import com.raphael.votacoop.resources.repositories.VotoRepository;
 
 @Service
-public class ServiceUpdateVoto {
+public class ServiceDeleteVoto {
 
 	@Autowired
 	private VotoRepository votoRepository;
