@@ -73,7 +73,7 @@ public class ControllerVoto {
 	public ResponseEntity<List<Voto>> findAllByIdSessao(
 			@RequestParam(required = true) Integer id_sessao
 	){
-		List<Voto> listVotos = serviceFindVotos.findAllByIdSessaoId(id_sessao);
+		List<Voto> listVotos = serviceFindVotos.findAllBySessaoVotacaoId(id_sessao);
 		return ResponseEntity.ok().body(listVotos);
 	}
 	

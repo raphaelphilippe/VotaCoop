@@ -93,7 +93,7 @@ public class ServiceCreateVoto {
 		if(sessaoVotacaoDTO.getStatusSessao().equals(StatusSessao.VOTACAO_ABERTA)) {
 			return true;
 		} else {
-			throw new ValidationsException("Voto não Enviado! A Sessão de Votação " + this.votoDTO.getIdSessaoVotacao() + " está encerrada.");
+			throw new ValidationsException("Voto não Enviado! A Sessão de Votação ID: " + this.votoDTO.getIdSessaoVotacao() + " está encerrada.");
 		}
 	}
 }

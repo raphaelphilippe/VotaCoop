@@ -23,8 +23,8 @@ public class SessaoVotacaoDTO implements Serializable{
 	private LocalDateTime dataHoraFinalSessao;
 	private StatusSessao statusSessao;
 	
-	private Integer qtdSim;
-	private Integer qtdNao;
+	private long qtdSim;
+	private long qtdNao;
 	
 	public SessaoVotacaoDTO() {
 		
@@ -86,19 +86,19 @@ public class SessaoVotacaoDTO implements Serializable{
 		this.statusSessao = statusSessao;
 	}
 
-	public Integer getQtdSim() {
+	public long getQtdSim() {
 		return qtdSim;
 	}
 
-	public void setQtdSim(Integer qtdSim) {
+	public void setQtdSim(long qtdSim) {
 		this.qtdSim = qtdSim;
 	}
 
-	public Integer getQtdNao() {
+	public long getQtdNao() {
 		return qtdNao;
 	}
 
-	public void setQtdNao(Integer qtdNao) {
+	public void setQtdNao(long qtdNao) {
 		this.qtdNao = qtdNao;
 	}
 }

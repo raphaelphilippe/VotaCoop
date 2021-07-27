@@ -26,7 +26,7 @@ public class ServiceFindVotos {
 
 	}
 	
-	public List<Voto> findAllByIdSessaoId(Integer idSessaoVotacao) {
+	public List<Voto> findAllBySessaoVotacaoId(Integer idSessaoVotacao) {
 		return votoRepository.findAllBySessaoVotacaoId(idSessaoVotacao);
 	}
 	

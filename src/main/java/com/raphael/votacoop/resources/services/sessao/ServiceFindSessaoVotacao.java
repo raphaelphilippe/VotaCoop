@@ -9,16 +9,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.raphael.votacoop.domain.SessaoVotacao;
+import com.raphael.votacoop.domain.Voto;
+import com.raphael.votacoop.domain.enums.OpcoesVotacao;
 import com.raphael.votacoop.domain.enums.StatusSessao;
 import com.raphael.votacoop.dtos.SessaoVotacaoDTO;
 import com.raphael.votacoop.resources.exceptions.ObjectNotFoundException;
 import com.raphael.votacoop.resources.repositories.SessaoVotacaoRepository;
+import com.raphael.votacoop.resources.services.voto.ServiceFindVotos;
 
 @Service
 public class ServiceFindSessaoVotacao {
 	
+	SessaoVotacaoDTO sessaoVotacaoDTO;
+	
 	@Autowired
 	private SessaoVotacaoRepository sessaoVotacaoRepository;
+	
+	@Autowired
+	private ServiceFindVotos serviceFindVotos;
 	
 	
 	public List<SessaoVotacaoDTO> findAllDTO(){
@@ -52,33 +60,37 @@ public class ServiceFindSessaoVotacao {
 	
 	public SessaoVotacaoDTO sessaoDTOfromEntity(SessaoVotacao sessaoVotacao) {
 		
-		SessaoVotacaoDTO sessaoVotacaoDTO = new SessaoVotacaoDTO(sessaoVotacao);
-		processaResultadoSessao(sessaoVotacaoDTO);
+		this.sessaoVotacaoDTO = new SessaoVotacaoDTO(sessaoVotacao);
+		processaResultadoSessao();
 		return sessaoVotacaoDTO;
 	}
 	
-	private void processaResultadoSessao(SessaoVotacaoDTO sessaoVotacaoDTO) {
-		String[] listPrazoSessao = sessaoVotacaoDTO.getTempoPrazo().split(":");
+	private void processaResultadoSessao() {
 		
-		LocalDateTime dataHoraFinalSessao = sessaoVotacaoDTO.getDataHoraInicioSessao()
+		String[] listPrazoSessao = this.sessaoVotacaoDTO.getTempoPrazo().split(":");
+		
+		LocalDateTime dataHoraFinalSessao = this.sessaoVotacaoDTO.getDataHoraInicioSessao()
 				.plusHours(Integer.parseInt(listPrazoSessao[0]))
 				.plusMinutes(Integer.parseInt(listPrazoSessao[1]));
 		
-		sessaoVotacaoDTO.setDataHoraFinalSessao(dataHoraFinalSessao);
+		this.sessaoVotacaoDTO.setDataHoraFinalSessao(dataHoraFinalSessao);
 		
 		LocalDateTime dataHoraAtual = LocalDateTime.now();
 		
 		if(dataHoraAtual.isBefore(dataHoraFinalSessao)) {
-			sessaoVotacaoDTO.setStatusSessao(StatusSessao.VOTACAO_ABERTA);
+			this.sessaoVotacaoDTO.setStatusSessao(StatusSessao.VOTACAO_ABERTA);
 		} else {
-			sessaoVotacaoDTO.setStatusSessao(StatusSessao.VOTACAO_FINALIZADA);
-			setVotosSessaoDTO(sessaoVotacaoDTO);
+			this.sessaoVotacaoDTO.setStatusSessao(StatusSessao.VOTACAO_FINALIZADA);
+			setVotosSessaoDTO();
 		}
 	}
 	
-	private void setVotosSessaoDTO(SessaoVotacaoDTO sessaoVotacaoDTO) {
-		sessaoVotacaoDTO.setQtdSim(10);
-		sessaoVotacaoDTO.setQtdNao(9);
+	private void setVotosSessaoDTO() {
+		
+		List<Voto> listVoto = serviceFindVotos.findAllBySessaoVotacaoId(this.sessaoVotacaoDTO.getId());
+		
+		this.sessaoVotacaoDTO.setQtdSim(listVoto.stream().filter(voto -> voto.getVoto() == OpcoesVotacao.SIM).count());
+		this.sessaoVotacaoDTO.setQtdNao(listVoto.stream().filter(voto -> voto.getVoto() == OpcoesVotacao.NAO).count());
 	}
 	
 }

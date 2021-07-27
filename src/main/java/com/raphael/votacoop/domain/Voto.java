@@ -21,7 +21,7 @@ public class Voto implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private OpcoesVotacao voto;
+	private Integer voto;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataHoraVoto;
@@ -41,10 +41,11 @@ public class Voto implements Serializable{
 	public Voto(Integer id, OpcoesVotacao voto, LocalDateTime dataHoraVoto, SessaoVotacao sessaoVotacao, Usuario usuario) {
 		super();
 		this.id = id;
-		this.voto = voto;
+		this.voto = voto.getCod();
 		this.dataHoraVoto = dataHoraVoto;
 		this.sessaoVotacao = sessaoVotacao;
 		this.usuario = usuario;
+		
 	}
 
 	public Integer getId() {
@@ -56,10 +57,10 @@ public class Voto implements Serializable{
 	}
 
 	public OpcoesVotacao getVoto() {
-		return voto;
+		return OpcoesVotacao.toEnum(this.voto);
 	}
 
-	public void setVoto(OpcoesVotacao voto) {
+	public void setVoto(Integer voto) {
 		this.voto = voto;
 	}
 
