@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.raphael.votacoop.domain.enums.OpcoesVotacao;
 
 @Entity
@@ -22,13 +22,14 @@ public class Voto implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private OpcoesVotacao voto;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime dataHoraVoto;
 	
 	@ManyToOne
 	@JoinColumn(name="idSessao")
 	private SessaoVotacao sessaoVotacao;
 	
-	//@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
