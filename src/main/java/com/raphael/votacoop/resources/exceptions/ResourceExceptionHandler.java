@@ -1,6 +1,7 @@
 package com.raphael.votacoop.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,6 +43,13 @@ public class ResourceExceptionHandler {
 		for(FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
+	}
+	
+	@ExceptionHandler(FeignException.class)
+	public ResponseEntity<StandardError> feing(FeignException e, HttpServletRequest request){
+		
+		ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), "CPF Inválido.", System.currentTimeMillis());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 	}
 }

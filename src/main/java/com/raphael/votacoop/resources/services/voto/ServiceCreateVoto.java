@@ -6,7 +6,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.raphael.votacoop.clients.CpfClient;
+import com.raphael.votacoop.clients.responses.CpfResponse;
+import com.raphael.votacoop.domain.Usuario;
 import com.raphael.votacoop.domain.Voto;
+import com.raphael.votacoop.domain.enums.CpfValidationOptions;
 import com.raphael.votacoop.domain.enums.StatusSessao;
 import com.raphael.votacoop.dtos.SessaoVotacaoDTO;
 import com.raphael.votacoop.dtos.VotoDTO;
@@ -14,6 +18,7 @@ import com.raphael.votacoop.resources.exceptions.ValidationsException;
 import com.raphael.votacoop.resources.repositories.VotoRepository;
 import com.raphael.votacoop.resources.services.sessao.ServiceFindSessaoVotacao;
 import com.raphael.votacoop.resources.services.usuario.ServiceFindUsuarios;
+
 
 @Service
 public class ServiceCreateVoto {
@@ -31,6 +36,9 @@ public class ServiceCreateVoto {
 	
 	@Autowired
 	private ServiceFindUsuarios serviceFindUsuarios;
+	
+	@Autowired
+	private CpfClient cpfClient;
 	
 	
 	public Voto create(VotoDTO votoDTO){
@@ -58,6 +66,7 @@ public class ServiceCreateVoto {
 		
 	}
 	
+	
 	private boolean checkCanVote() {
 		
 		checkValidCPF();
@@ -67,10 +76,20 @@ public class ServiceCreateVoto {
 		return true;
 	}
 	
+	
 	private boolean checkValidCPF(){
 		
-		return true;
+		Usuario usuario = serviceFindUsuarios.findById(this.votoDTO.getIdUsuario());
+		
+		CpfResponse cpfResponse = cpfClient.getCpf(usuario.getCpf());
+		
+		if(cpfResponse.getStatus().equals(CpfValidationOptions.ABLE_TO_VOTE)) {
+			return true;
+		} else {
+			throw new ValidationsException("Voto não Enviado! O CPF do usuário não está habilitado à votar.");
+		}
 	}
+	
 	
 	private boolean checkAlreadyVoted() {
 		
@@ -85,6 +104,7 @@ public class ServiceCreateVoto {
 			return true;
 		}
 	}
+	
 	
 	private boolean checkSessionIsOpen() {
 		
