@@ -18,9 +18,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.raphael.votacoop.domain.Voto;
 import com.raphael.votacoop.dtos.VotoDTO;
 import com.raphael.votacoop.resources.services.voto.ServiceCreateVoto;
-import com.raphael.votacoop.resources.services.voto.ServiceDeleteVoto;
 import com.raphael.votacoop.resources.services.voto.ServiceFindVotos;
-import com.raphael.votacoop.resources.services.voto.ServiceUpdateVoto;
 
 @RestController
 @RequestMapping(value="/votos")
@@ -31,14 +29,7 @@ public class ControllerVoto {
 	
 	@Autowired
 	private ServiceCreateVoto serviceCreateVoto;
-	
-	@Autowired
-	private ServiceDeleteVoto serviceDeleteVoto;
-	
-	@Autowired
-	private ServiceUpdateVoto serviceUpdateVoto;
 
-	
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<Voto>> findAll(){
