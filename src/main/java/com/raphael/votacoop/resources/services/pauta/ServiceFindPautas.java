@@ -31,8 +31,8 @@ public class ServiceFindPautas {
 	}
 	
 	public Pauta findById(Integer id) {
-		Optional<Pauta> obj = pautaRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException("Pauta não encontrada! ID: " + id + ", Tipo: " + Pauta.class.getSimpleName()));
+		Optional<Pauta> pauta = pautaRepository.findById(id);
+		return pauta.orElseThrow(() -> new ObjectNotFoundException("Pauta não encontrada! ID: " + id + ", Tipo: " + Pauta.class.getSimpleName()));
 
 	}
 	

@@ -25,4 +25,26 @@ public class ServiceFindUsuarios {
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id + ", Tipo: " + Usuario.class.getSimpleName()));
 	}
 	
+	public Usuario findByCpf(String cpf) {
+		
+		Usuario usuario = usuarioRepository.findByCpf(cpf);
+		
+		if (usuario != null) {
+			return usuario;
+		}
+		
+		return null;
+	}
+	
+	public Usuario findByEmail(String email) {
+		
+		Usuario usuario = usuarioRepository.findByEmail(email);
+		
+		if (usuario != null) {
+			return usuario;
+		}
+		
+		return null;
+	}
+	
 }

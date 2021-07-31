@@ -16,8 +16,8 @@ public class ServiceUpdateUsuario {
 	private UsuarioRepository usuarioRepository;
 	
 	
-	public Usuario update(Usuario obj) {
-		serviceFindUsuarios.findById(obj.getId());
-		return usuarioRepository.save(obj);
+	public Usuario update(Usuario usuario) {
+		serviceFindUsuarios.findById(usuario.getId());
+		return usuarioRepository.save(usuario);
 	}
 }

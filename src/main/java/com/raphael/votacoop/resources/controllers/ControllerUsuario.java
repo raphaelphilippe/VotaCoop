@@ -41,31 +41,29 @@ public class ControllerUsuario {
 	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<UsuarioDTO>> findAll(){
-		List<Usuario> list = serviceFindUsuarios.findAll();
-		List<UsuarioDTO> listDTO = list.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
-		return ResponseEntity.ok().body(listDTO);
+		List<Usuario> listUsuarios = serviceFindUsuarios.findAll();
+		List<UsuarioDTO> listUsuariosDTO = listUsuarios.stream().map(obj -> new UsuarioDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listUsuariosDTO);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public ResponseEntity<Usuario> findById(@PathVariable Integer id){
-		Usuario obj = serviceFindUsuarios.findById(id);
-		return ResponseEntity.ok().body(obj);
+		Usuario usuario = serviceFindUsuarios.findById(id);
+		return ResponseEntity.ok().body(usuario);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioDTO objDTO){
-		Usuario obj = serviceCreateUsuario.fromDTO(objDTO);
-		obj = serviceCreateUsuario.create(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+	public ResponseEntity<Void> insert(@Valid @RequestBody UsuarioDTO usuarioDTO){
+		Usuario usuario = serviceCreateUsuario.fromDTO(usuarioDTO);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(usuario.getId()).toUri();
 		return ResponseEntity.created(uri).build();
-		//return ResponseEntity.ok().body(obj);
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Void> update(@Valid @RequestBody UsuarioDTO objDTO, @PathVariable Integer id){
-		Usuario obj = serviceCreateUsuario.fromDTO(objDTO);
-		obj.setId(id);
-		obj = serviceUpdateUsuario.update(obj);
+	public ResponseEntity<Void> update(@Valid @RequestBody UsuarioDTO usuarioDTO, @PathVariable Integer id){
+		Usuario usuario = serviceCreateUsuario.fromDTO(usuarioDTO);
+		usuario.setId(id);
+		usuario = serviceUpdateUsuario.update(usuario);
 		return ResponseEntity.noContent().build();
 	}
 	

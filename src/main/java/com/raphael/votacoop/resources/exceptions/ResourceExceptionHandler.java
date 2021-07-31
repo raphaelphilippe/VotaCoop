@@ -1,7 +1,6 @@
 package com.raphael.votacoop.resources.exceptions;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

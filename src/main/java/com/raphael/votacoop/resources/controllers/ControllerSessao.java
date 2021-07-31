@@ -33,6 +33,7 @@ public class ControllerSessao {
 	@Autowired
 	private ServiceDeleteSessaoVotacao serviceDeleteSessaoVotacao;
 		
+	
 	@RequestMapping(method=RequestMethod.GET)
 	public ResponseEntity<List<SessaoVotacaoDTO>> findAll(){
 		List<SessaoVotacaoDTO> listSessaoVotacaoDTO = serviceFindSessaoVotacao.findAllDTO();
@@ -46,7 +47,7 @@ public class ControllerSessao {
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
-	public ResponseEntity<Void> create(@Valid @RequestParam(required = true) Integer idPauta, @RequestParam(required = true) String prazoSessao){
+	public ResponseEntity<Void> create(@Valid @RequestParam(required = true) Integer idPauta, String prazoSessao){
 		SessaoVotacao sessaoVotacao = serviceCreateSessaoVotacao.create(idPauta, prazoSessao);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(sessaoVotacao.getId()).toUri();
 		return ResponseEntity.created(uri).build();

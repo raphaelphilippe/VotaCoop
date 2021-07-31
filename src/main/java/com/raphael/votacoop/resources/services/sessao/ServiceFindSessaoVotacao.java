@@ -34,7 +34,6 @@ public class ServiceFindSessaoVotacao {
 		List<SessaoVotacao> listSessaoVotacao = new ArrayList<>(); 
 		listSessaoVotacao = sessaoVotacaoRepository.findAll();
 		
-		//List<SessaoVotacaoDTO> listSessaoVotacaoDTO = listSessaoVotacao.stream().map(sessaoVotacaoDTO -> new SessaoVotacaoDTO(sessaoVotacaoDTO)).collect(Collectors.toList());
 		List<SessaoVotacaoDTO> listSessaoVotacaoDTO = new ArrayList<>();
 		
 		for(SessaoVotacao sessaoVotacao : listSessaoVotacao) {
@@ -44,12 +43,14 @@ public class ServiceFindSessaoVotacao {
 		return listSessaoVotacaoDTO;
 	}
 	
+	
 	public SessaoVotacao findById(Integer id) {
 		
 		Optional<SessaoVotacao> sessaoVotacao = sessaoVotacaoRepository.findById(id);
 		return sessaoVotacao.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado! ID: " + id + ", Tipo: " + SessaoVotacao.class.getSimpleName()));
 			
 	}
+	
 	
 	public SessaoVotacaoDTO findByDTO(Integer id) {
 		
@@ -58,12 +59,14 @@ public class ServiceFindSessaoVotacao {
 		
 	}
 	
+	
 	public SessaoVotacaoDTO sessaoDTOfromEntity(SessaoVotacao sessaoVotacao) {
 		
 		this.sessaoVotacaoDTO = new SessaoVotacaoDTO(sessaoVotacao);
 		processaResultadoSessao();
 		return sessaoVotacaoDTO;
 	}
+	
 	
 	private void processaResultadoSessao() {
 		
@@ -84,6 +87,7 @@ public class ServiceFindSessaoVotacao {
 			setVotosSessaoDTO();
 		}
 	}
+	
 	
 	private void setVotosSessaoDTO() {
 		

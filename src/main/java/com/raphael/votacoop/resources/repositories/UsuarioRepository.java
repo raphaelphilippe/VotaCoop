@@ -8,4 +8,7 @@ import com.raphael.votacoop.domain.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer>{
 
+	Usuario findByCpf(String cpf);
+	Usuario findByEmail(String email);
+	
 }
